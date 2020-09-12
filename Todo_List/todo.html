@@ -6,10 +6,16 @@
     <title>TODO list</title>
 </head>
 <body>
-    <ul>
+    <form for="todo">
+        <input type="text" name="todo" id="todo" required>
+        <button type="button" id="addBtn">追加</button>
+    </form>
+    
+    <ul id="lists">
         <li>買い物</li>
-        <li>勉強</li>
         <li>睡眠</li>
+        <li>勉強</li>
     </ul>
+    <script src="./todo.js"></script>
 </body>
 </html>
