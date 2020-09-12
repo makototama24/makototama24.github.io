@@ -1,23 +1,22 @@
 function main(){
     fetchUserInfo("makototama24")
+    .then((userinfo) => createView(userinfo))
+    .then((view) => displayView(view))
+    .catch(error => {
+        console.erro(`エラーが発生しました　(${error})`);
+    });
 }
 
 function fetchUserInfo(userId){
-    fetch(`https://api.github.com/users/${encodeURIComponent(userId)}`)
+    return fetch(`https://api.github.com/users/${encodeURIComponent(userId)}`)
     .then(response => {
-        console.log(response.status);
         if(!response.ok){
-            console.error("エラーレスポンス", response);
+           return Promise.reject(new Error(`${response.status}: ${response.statusText}`));
         }else{
-            return response.json().then(userinfo => {
-                const view = createView(userinfo);
-                displayView(view);
-            });
-        }
-        }).catch(error => {
-            console.error(error);
-        });
-    }
+            return response.json();
+        };
+    });
+}
 
 function displayView(view){
     const result = document.getElementById("result");
