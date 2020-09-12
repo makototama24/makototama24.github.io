@@ -1,10 +1,16 @@
-function main(){
-    fetchUserInfo("makototama24")
-    .then((userinfo) => createView(userinfo))
-    .then((view) => displayView(view))
-    .catch(error => {
-        console.erro(`エラーが発生しました　(${error})`);
-    });
+async function main(){
+    try{
+        const userId = getUserId();
+        const userinfo = await fetchUserInfo(userId);
+        const view = createView(userinfo);
+        displayView(view);
+    }catch(error) {
+        console.error(`エラーが発生しました　(${error})`);
+    };
+}
+
+function getUserId(){
+    return document.getElementById("userid").value;
 }
 
 function fetchUserInfo(userId){
