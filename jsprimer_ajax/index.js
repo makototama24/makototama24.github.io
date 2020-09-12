@@ -1,3 +1,7 @@
+function main(){
+    fetchUserInfo("makototama24")
+}
+
 function fetchUserInfo(userId){
     fetch(`https://api.github.com/users/${encodeURIComponent(userId)}`)
     .then(response => {
@@ -6,19 +10,8 @@ function fetchUserInfo(userId){
             console.error("エラーレスポンス", response);
         }else{
             return response.json().then(userinfo => {
-                const view = escapeHTML`
-                <h4>${userinfo.name} (@${userinfo.login})</h4>
-                <img src="${userinfo.avatar_url}"alt="${userinfo.login}" height="100">
-                <dl>
-                    <dt>Location</dt>
-                    <dd>${userinfo.location}</dd>
-                    <dt>Repositories</dt>
-                    <dd>${userinfo.public_repos}</dd>
-                </dl>
-                `;
-                
-                const result = document.getElementById("result")
-                result.innerHTML = view;
+                const view = createView(userinfo);
+                displayView(view);
             });
         }
         }).catch(error => {
@@ -26,6 +19,23 @@ function fetchUserInfo(userId){
         });
     }
 
+function displayView(view){
+    const result = document.getElementById("result");
+    result.innerHTML = view;
+}
+
+function createView(userinfo){
+    return  escapeHTML`
+    <h4>${userinfo.name} (@${userinfo.login})</h4>
+    <img src="${userinfo.avatar_url}"alt="${userinfo.login}" height="100">
+    <dl>
+        <dt>Location</dt>
+        <dd>${userinfo.location}</dd>
+        <dt>Repositories</dt>
+        <dd>${userinfo.public_repos}</dd>
+    </dl>
+    `;
+}
 
 function escapeSpecialChars(str) {
     return str
