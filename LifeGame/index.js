@@ -1,23 +1,13 @@
 function draw() {
-    var ctx = document.getElementById('game_canvas').getContext('2d');
-  
-    // Create gradients
-    var lingrad = ctx.createLinearGradient(0,0,0,150);
-    lingrad.addColorStop(0, '#00ABEB');
-    lingrad.addColorStop(0.5, '#fff');
-    lingrad.addColorStop(0.5, '#26C000');
-    lingrad.addColorStop(1, '#fff');
-  
-    var lingrad2 = ctx.createLinearGradient(0,50,0,95);
-    lingrad2.addColorStop(0.5, '#000');
-    lingrad2.addColorStop(1, 'rgba(0,0,0,0)');
-  
-    // assign gradients to fill and stroke styles
-    ctx.fillStyle = lingrad;
-    ctx.strokeStyle = lingrad2;
-    
-    // draw shapes
-    ctx.fillRect(10,10,130,130);
-    ctx.strokeRect(50,50,50,50);
-  
+    const canvas = document.getElementById('game_canvas');
+    const ctx = canvas.getContext(`2d`);
+    const row_max = 30;
+    const col_max = 30;
+
+    for (let r = 0; r < row_max; r++){
+      for (let c = 0; c < col_max; c++) {
+        ctx.strokeStyle = '#DDDDDD'
+        ctx.strokeRect(r*canvas.width/row_max, c*canvas.height/col_max, canvas.width/row_max, canvas.height/col_max);
+      }
+    }
   }
