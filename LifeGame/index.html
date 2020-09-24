@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="./index.css">
     <title>Life Game</title>
 </head>
-<body>
+<body onload="draw();">
     <canvas id="game_canvas" width="300" height="300"></canvas>
     <br>
     <button id="start_btn" type="button">Start</button>
@@ -15,8 +15,10 @@
     
     <script type="module" src="./main.js">
         import {GameController} from './main.js';
-        console.log('move')
-        new GameController();
+        function draw(){
+            console.log('move');
+            new GameController();
+        }
     </script>
 </body>
 </html>
