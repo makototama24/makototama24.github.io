@@ -6,19 +6,13 @@
     <link rel="stylesheet" href="./index.css">
     <title>Life Game</title>
 </head>
-<body onload="draw();">
+<body>
     <canvas id="game_canvas" width="300" height="300"></canvas>
     <br>
     <button id="start_btn" type="button">Start</button>
     <button id="stop_btn" type="button">Stop</button>
     <button id="reset_btn" type="button">Reset</button>
     
-    <script type="module" src="./main.js">
-        import {GameController} from './main.js';
-        function draw(){
-            console.log('move');
-            new GameController();
-        }
-    </script>
+    <script type="module" src="./src/main.js"></script>
 </body>
 </html>
