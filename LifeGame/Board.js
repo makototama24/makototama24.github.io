@@ -1,5 +1,8 @@
+import {Cell} from './Cell.js'
+
 export class Board{
     constructor(){
+        console.log('board')
       this.map = new Array((ROW_MAX+2)*(COL_MAX+2));
       for(let r = 0; r < (ROW_MAX+2); r++){
         for(let c = 0; c < (COL_MAX+2); c++){

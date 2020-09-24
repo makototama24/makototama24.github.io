@@ -1,5 +1,6 @@
 export class Cell{
     constructor(row, col){
+        console.log('cell')
       this.row = row;
       this.col = col;
       this.isAlive = false;

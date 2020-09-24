@@ -1,11 +1,16 @@
+import {Cell} from './Cell.js'
+import {Board} from './Board.js';
+
 const ROW_MAX = 30;
 const COL_MAX = 30;
 const Cell_width = 10;
 const Cell_height = 10;
+
 const drawCanvas = () => {new GameControl();};
 
 class GameControl{
   constructor(){
+    console.log('gamecontrol')
     this.canvas = document.getElementById('game_canvas');
     this.ctx = this.canvas.getContext(`2d`);
     this.board = new Board();
