@@ -23,8 +23,6 @@ export class GameControler{
     document.getElementById("stop_btn").addEventListener('click', () =>this.stopGame(), false);
     document.getElementById("reset_btn").addEventListener('click', () =>this.resetGame(), false);
     this.canvas.addEventListener('click', e => this.click(e), false);
-    this.canvas.addEventListener('mousedown', e => this.mousedown(e), false);
-    this.canvas.addEventListener('mouseup', e => this.mouseup(e), false);
   }
 
   startGame(){
@@ -56,29 +54,6 @@ export class GameControler{
       }
     });
     this.board.render(this.ctx);
-  }
-
-  mousedown(e){
-    console.log('mousedown');
-    this.isMouseDown = true;
-    while(this.isMouseDown){
-      const rect = this.canvas.getBoundingClientRect();
-      const point = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      };
-      this.board.map.forEach(cell => {
-        if(cell.isClick(point)){
-          cell.change();
-        }
-      });
-      this.board.render(this.ctx);
-    }
-  }
-
-  mouseup(e){
-    console.log('mouseup');
-    this.isMouseDown = false;
   }
 }
 
