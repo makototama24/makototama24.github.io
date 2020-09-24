@@ -6,9 +6,9 @@ const COL_MAX = 30;
 const Cell_width = 10;
 const Cell_height = 10;
 
-export const drawCanvas = () => {new GameControl();};
+// export const drawCanvas = () => {new GameControl();};
 
-class GameControl{
+class GameControler{
   constructor(){
     console.log('gamecontrol')
     this.canvas = document.getElementById('game_canvas');
