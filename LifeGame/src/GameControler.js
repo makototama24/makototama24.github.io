@@ -23,8 +23,8 @@ export class GameControler{
     document.getElementById("stop_btn").addEventListener('click', () =>this.stopGame(), false);
     document.getElementById("reset_btn").addEventListener('click', () =>this.resetGame(), false);
     this.canvas.addEventListener('click', e => this.click(e), false);
-    this.canvas.addEventListener('mousedown', e => this.mousedown);
-    this.canvas.addEventListener('mouseup', e => this.mouseup);
+    this.canvas.addEventListener('mousedown', e => this.mousedown(e));
+    this.canvas.addEventListener('mouseup', e => this.mouseup(e));
   }
 
   startGame(){
