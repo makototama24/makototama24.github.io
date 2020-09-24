@@ -11,6 +11,8 @@ export const Cell_height = 10;
 export class GameControler{
   constructor(){
     console.log('gamecontrol')
+    
+
     this.canvas = document.getElementById('game_canvas');
     this.ctx = this.canvas.getContext(`2d`);
     this.board = new Board();

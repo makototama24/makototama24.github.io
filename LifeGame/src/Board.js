@@ -1,5 +1,5 @@
 import {Cell} from './Cell.js'
-import * as Module from './GameControler.js'
+import {ROW_MAX, COL_MAX, Cell_height, Cell_width} from './GameControler.js'
 
 export class Board{
     constructor(){
