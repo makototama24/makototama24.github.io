@@ -59,6 +59,7 @@ export class GameControler{
   }
 
   mousedown(e){
+    console.log('mousedown');
     this.isMouseDown = true;
     while(this.isMouseDown){
       const rect = this.canvas.getBoundingClientRect();
@@ -76,6 +77,7 @@ export class GameControler{
   }
 
   mouseup(e){
+    console.log('mouseup');
     this.isMouseDown = false;
   }
 }
