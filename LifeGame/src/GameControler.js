@@ -17,11 +17,14 @@ export class GameControler{
     this.ctx = this.canvas.getContext(`2d`);
     this.board = new Board();
     this.board.render(this.ctx);
+    this.isMouseDown = false;
 
     document.getElementById("start_btn").addEventListener('click', () =>this.startGame(), false);
     document.getElementById("stop_btn").addEventListener('click', () =>this.stopGame(), false);
     document.getElementById("reset_btn").addEventListener('click', () =>this.resetGame(), false);
-    this.canvas.addEventListener('hover', e => this.clickCanvas(e), false);
+    this.canvas.addEventListener('click', e => this.click(e), false);
+    this.canvas.addEventListener('mousedown', e => this.mousedown);
+    this.canvas.addEventListener('mouseup', e => this.mouseup);
   }
 
   startGame(){
@@ -41,7 +44,7 @@ export class GameControler{
     console.log('reset')
   }
 
-  clickCanvas(e){
+  click(e){
     const rect = this.canvas.getBoundingClientRect();
     const point = {
       x: e.clientX - rect.left,
@@ -53,6 +56,27 @@ export class GameControler{
       }
     });
     this.board.render(this.ctx);
+  }
+
+  mousedown(e){
+    this.isMouseDown = true;
+    while(this.isMouseDown){
+      const rect = this.canvas.getBoundingClientRect();
+      const point = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+      this.board.map.forEach(cell => {
+        if(cell.isClick(point)){
+          cell.change();
+        }
+      });
+      this.board.render(this.ctx);
+    }
+  }
+
+  mouseup(e){
+    this.isMouseDown = false;
   }
 }
 
