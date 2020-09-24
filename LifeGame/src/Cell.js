@@ -1,4 +1,5 @@
-import * as Module from './GameControler.js'
+import {ROW_MAX, COL_MAX, Cell_height, Cell_width} from './GameControler.js'
+
 
 export class Cell{
     constructor(row, col){
