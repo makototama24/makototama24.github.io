@@ -11,7 +11,7 @@ export const Cell_height = 10;
 export class GameControler{
   constructor(){
     console.log('gamecontrol')
-    
+
 
     this.canvas = document.getElementById('game_canvas');
     this.ctx = this.canvas.getContext(`2d`);
@@ -21,7 +21,7 @@ export class GameControler{
     document.getElementById("start_btn").addEventListener('click', () =>this.startGame(), false);
     document.getElementById("stop_btn").addEventListener('click', () =>this.stopGame(), false);
     document.getElementById("reset_btn").addEventListener('click', () =>this.resetGame(), false);
-    this.canvas.addEventListener('click', e => this.clickCanvas(e), false);
+    this.canvas.addEventListener('hover', e => this.clickCanvas(e), false);
   }
 
   startGame(){
