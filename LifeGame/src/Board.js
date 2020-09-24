@@ -1,4 +1,5 @@
 import {Cell} from './Cell.js'
+import * as Module from './GameControler.js'
 
 export class Board{
     constructor(){

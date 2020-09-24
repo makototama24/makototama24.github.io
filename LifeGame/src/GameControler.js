@@ -1,10 +1,10 @@
 import {Cell} from './Cell.js'
 import {Board} from './Board.js';
 
-const ROW_MAX = 30;
-const COL_MAX = 30;
-const Cell_width = 10;
-const Cell_height = 10;
+export const ROW_MAX = 30;
+export const COL_MAX = 30;
+export const Cell_width = 10;
+export const Cell_height = 10;
 
 // export const drawCanvas = () => {new GameControl();};
 

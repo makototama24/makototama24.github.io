@@ -1,3 +1,5 @@
+import * as Module from './GameControler.js'
+
 export class Cell{
     constructor(row, col){
         console.log('cell')
