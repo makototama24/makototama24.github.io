@@ -11,6 +11,6 @@ export class Map{
     }
 
     get(row, col){
-        return this.map[row, col];
+        return this.map[row*(ROW_MAX+2) + col];
     }
 }
