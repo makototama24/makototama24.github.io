@@ -26,7 +26,8 @@ export class GameControler{
       if(cell.judgeNextstage(this.board.map)){
         cell.change();
       }
-    })
+    });
+    this.board.render(this.ctx);
     console.log('start')
   }
 
