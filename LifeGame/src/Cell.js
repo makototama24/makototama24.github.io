@@ -3,7 +3,7 @@ import {ROW_MAX, COL_MAX, Cell_height, Cell_width} from './GameControler.js'
 
 export class Cell{
     constructor(row, col){
-        console.log('cell')
+      console.log('cell')
       this.row = row;
       this.col = col;
       this.isAlive = false;
