@@ -23,13 +23,44 @@ export class GameControler{
 
   startGame(){
     this.board.map.map.forEach(cell => {
-      if(cell.judgeNextstage(this.board.map)){
+      if(judge(cell)){
         console.log('change')
         cell.change();
       }
     });
     this.board.render(this.ctx);
     console.log('start')
+  }
+
+  judge(cell){
+     // 周囲のマスの生存状況を確認
+     let count = 0;
+     for(let r = cell.row-1; r < cell.row+2; r++){
+       for(let c = cell.col-1; c < cell.col+2; c++){
+         if((r != cell.row || c != cell.col) && this.board.map.get(r,c).isAlive){
+           count++;
+         }
+       }
+     }
+     console.log(`count = ${count}`);
+ 
+     // 生存判定
+     if(cell.isAlive){
+       if(count ===2 || count ===3){
+         return true;
+       }
+       else{
+         return false;
+       }
+     }
+     else{
+       if(count === 3){
+         return true;
+       }
+       else{
+         return false;
+       }
+     }
   }
 
   stopGame(){

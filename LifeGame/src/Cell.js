@@ -18,34 +18,6 @@ export class Cell{
     }
   
     judgeNextstage(map){
-      // 周囲のマスの生存状況を確認
-      let count = 0;
-      console.log(`${map}`)
-      for(let r = this.row-1; r < this.row+2; r++){
-        for(let c = this.col-1; c < this.col+2; c++){
-          if((r != this.row || c != this.col) && map.get(r,c).isAlive){
-            count++;
-          }
-        }
-      }
-      console.log(`count = ${count}`);
-  
-      // 生存判定
-      if(this.isAlive){
-        if(count ===2 || count ===3){
-          return true;
-        }
-        else{
-          return false;
-        }
-      }
-      else{
-        if(count === 3){
-          return true;
-        }
-        else{
-          return false;
-        }
-      }
+     
     }
   }
