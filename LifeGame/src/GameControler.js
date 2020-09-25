@@ -25,7 +25,7 @@ export class GameControler{
     this.board.map.map.forEach(cell => {
       if(this.judge(cell)){
         console.log('change')
-        cell.change();
+        this.board.map.map[(cell.row+1)*(ROW_MAX+2)+(cell.col+1)].change();
       }
     });
     this.board.render(this.ctx);
