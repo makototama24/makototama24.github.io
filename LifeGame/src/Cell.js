@@ -23,8 +23,8 @@ export class Cell{
       let count = 0;
       for(let r = this.row-1; r < this.row+1; r++){
         for(let c = this.col-1; c < this.col+1; c++){
-          if(r != this.row && c != this.col){
-            count +=Number(map[r,c].isAlive);
+          if(r != this.row && c != this.col  && this.isAlive){
+            count++;
           }
         }
       }
