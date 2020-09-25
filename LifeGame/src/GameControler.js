@@ -33,7 +33,8 @@ export class GameControler{
   }
 
   judge(cell){
-     // 周囲のマスの生存状況を確認
+    if(cell.row < ROW_MAX && cell.col < COL_MAX){
+      // 周囲のマスの生存状況を確認
      let count = 0;
      for(let r = cell.row; r < cell.row+3; r++){
        for(let c = cell.col; c < cell.col+3; c++){
@@ -63,6 +64,8 @@ export class GameControler{
          return false;
        }
      }
+    }
+     
   }
 
   stopGame(){

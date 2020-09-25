@@ -12,12 +12,6 @@ export class Cell{
   
     // 生死の変更
     change(){
-      if(this.row != 0 && this.roe != ROW_MAX+1 && this.col != 0 && this.col != COL_MAX+1){
         this.isAlive = !this.isAlive;
-      }
-    }
-  
-    judgeNextstage(map){
-     
     }
   }
