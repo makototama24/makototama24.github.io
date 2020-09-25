@@ -20,7 +20,7 @@ export class Cell{
     judgeNextstage(map){
       // 周囲のマスの生存状況を確認
       let count = 0;
-      console.log(`${map} ${this.row} ${this.col}`)
+      console.log(`${map[(ROW_MAX+2)*this.row+this.col]} ${this.row} ${this.col}`)
       for(let r = this.row-1; r < this.row+2; r++){
         for(let c = this.col-1; c < this.col+2; c++){
           if((r != this.row || c != this.col) && map[(ROW_MAX+2)*r+c].isAlive){
