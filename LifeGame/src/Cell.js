@@ -24,9 +24,8 @@ export class Cell{
       console.log(`${this.row} ${this.col}`)
       for(let r = this.row-1; r < this.row+2; r++){
         for(let c = this.col-1; c < this.col+2; c++){
-          // if(r != this.row && c != this.col){
+          if(r != this.row || c != this.col){
             count++;
-          
         }
       }
       console.log(`count = ${count}`);
