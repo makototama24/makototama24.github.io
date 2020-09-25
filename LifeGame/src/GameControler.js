@@ -50,6 +50,7 @@ export class GameControler{
     };
     this.board.map.forEach(cell => {
       if(cell.isClick(point)){
+        console.log(cell)
         cell.change();
       }
     });
