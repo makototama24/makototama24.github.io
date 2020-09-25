@@ -22,11 +22,12 @@ export class GameControler{
   }
 
   startGame(){
-    if(cell.row < ROW_MAX && cell.col < COL_MAX){
       this.board.map.map.forEach(cell => {
-        if(this.judge(cell) != cell.isAlive){
-          console.log('change')
-          this.board.map.map[(cell.row+1)*(ROW_MAX+2)+(cell.col+1)].change();
+        if(cell.row < ROW_MAX && cell.col < COL_MAX){
+          if(this.judge(cell) != cell.isAlive){
+            console.log('change')
+            this.board.map.map[(cell.row+1)*(ROW_MAX+2)+(cell.col+1)].change();
+          }
         }
       });
       this.board.render(this.ctx);
