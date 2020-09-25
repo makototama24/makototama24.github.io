@@ -35,11 +35,11 @@ export class GameControler{
   judge(cell){
      // 周囲のマスの生存状況を確認
      let count = 0;
-     console.log(`${this.board.map.map[0]}`)
+     console.log(`${this.board.map.map}`)
      for(let r = cell.row; r < cell.row+3; r++){
        for(let c = cell.col; c < cell.col+3; c++){
          console.log(r*(ROW_MAX+2) + c)
-         if((r != cell.row || c != cell.col) && this.board.map[r*(ROW_MAX+2) + c].isAlive){
+         if((r != cell.row || c != cell.col) && this.board.map.map[r*(ROW_MAX+2) + c].isAlive){
            count++;
          }
        }
