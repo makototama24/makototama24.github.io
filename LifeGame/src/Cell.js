@@ -9,10 +9,7 @@ export class Cell{
       this.isAlive = false;
     }
   
-    isClick(point){
-      console.log(`${point.x} ${point.y}`)
-      return ((this.row-1)*Cell_width <= point.x) && (point.x < (this.row)*Cell_width) && ((this.col-1)*Cell_height <= point.y) && (point.y < (this.col)*Cell_height);
-    }
+    isClick = (point) =>  ((this.row-1)*Cell_width <= point.x) && (point.x < (this.row)*Cell_width) && ((this.col-1)*Cell_height <= point.y) && (point.y < (this.col)*Cell_height)
   
     // 生死の変更
     change(){
@@ -26,10 +23,11 @@ export class Cell{
       let count = 0;
       for(let r = this.row-1; r < this.row+1; r++){
         for(let c = this.col-1; c < this.col+1; c++){
-          count += map[r,c].isAlive;
+          if(r != this.row && c != this.col){
+            count += map[r,c].isAlive;
+          }
         }
       }
-      count -= this.isAlive;
   
       // 生存判定
       if(this.isAlive){
