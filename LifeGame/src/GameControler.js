@@ -23,8 +23,6 @@ export class GameControler{
 
   startGame(){
     this.board.map.map.forEach(cell => {
-     console.log(`${this.board.map.map[0].isAlive}`)
-
       if(this.judge(cell)){
         console.log('change')
         cell.change();
@@ -40,7 +38,7 @@ export class GameControler{
      console.log(`${this.board.map.map[0]}`)
      for(let r = cell.row-1; r < cell.row+2; r++){
        for(let c = cell.col-1; c < cell.col+2; c++){
-         if((r != cell.row || c != cell.col) && this.board.map.get(r,c).isAlive){
+         if((r != cell.row || c != cell.col) && this.board.map[r*(ROW_MAX+2) + c].isAlive){
            count++;
          }
        }
