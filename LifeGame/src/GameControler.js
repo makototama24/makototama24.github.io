@@ -33,7 +33,7 @@ export class GameControler{
       this.board.render(this.ctx);
       console.log('start')
     }
-  }
+  
 
   judge(cell){
       // 周囲のマスの生存状況を確認
