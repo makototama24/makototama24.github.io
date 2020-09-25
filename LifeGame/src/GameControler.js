@@ -22,20 +22,18 @@ export class GameControler{
   }
 
   startGame(){
-      this.board.map.map.forEach(cell => {
-        if(cell.row < ROW_MAX && cell.col < COL_MAX){
-          if(this.judge(cell) != cell.isAlive){
-            console.log('change')
-            this.board.map.map[(cell.row+1)*(ROW_MAX+2)+(cell.col+1)].change();
-          }
-        }
-      });
-      this.board.render(this.ctx);
-      console.log('start')
-    }
-  
+    this.board.map.map.forEach(cell => {
+      if(this.judge(cell)){
+        console.log('change')
+        this.board.map.map[(cell.row+1)*(ROW_MAX+2)+(cell.col+1)].change();
+      }
+    });
+    this.board.render(this.ctx);
+    console.log('start')
+  }
 
   judge(cell){
+    if(cell.row < ROW_MAX && cell.col < COL_MAX){
       // 周囲のマスの生存状況を確認
      let count = 0;
      for(let r = cell.row; r < cell.row+3; r++){
@@ -52,10 +50,10 @@ export class GameControler{
      // 生存判定
      if(cell.isAlive){
        if(count ===2 || count ===3){
-         return true;
+         return false;
        }
        else{
-         return false;
+         return true;
        }
      }
      else{
@@ -65,7 +63,9 @@ export class GameControler{
        else{
          return false;
        }
-     }    
+     }
+    }
+     
   }
 
   stopGame(){
