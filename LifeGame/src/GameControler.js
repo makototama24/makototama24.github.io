@@ -49,7 +49,6 @@ export class GameControler{
       y: e.clientY - rect.top
     };
     this.board.map.forEach(cell => {
-      console.log(cell)
       if(cell.isClick(point)){
         cell.change();
       }
