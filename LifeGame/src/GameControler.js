@@ -23,7 +23,7 @@ export class GameControler{
 
   startGame(){
     this.board.map.map.forEach(cell => {
-      if(this.judge(cell)){
+      if(this.judge(cell) != cell.isAlive){
         console.log('change')
         this.board.map.map[(cell.row+1)*(ROW_MAX+2)+(cell.col+1)].change();
       }
