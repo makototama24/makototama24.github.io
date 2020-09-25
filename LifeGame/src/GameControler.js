@@ -43,7 +43,7 @@ export class GameControler{
   }
 
   click(e){
-    console/log(this.board.map)
+    console.log(this.board.map)
     const rect = this.canvas.getBoundingClientRect();
     const point = {
       x: e.clientX - rect.left,
