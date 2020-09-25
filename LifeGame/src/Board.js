@@ -1,9 +1,10 @@
-import {Cell} from './Cell.js'
-import {ROW_MAX, COL_MAX, Cell_height, Cell_width} from './GameControler.js'
+import {Cell} from './Cell.js';
+import {ROW_MAX, COL_MAX, Cell_height, Cell_width} from './GameControler.js';
+import { Map } from './Map.js';
 
 export class Board{
     constructor(){
-      this.map = new Array(ROW_MAX+2*COL_MAX+2);
+      this.map = new Map();
       for(let r = 0; r < (ROW_MAX+2); r++){
         for(let c = 0; c < (COL_MAX+2); c++){
           const cell = new Cell(r, c);
@@ -13,7 +14,7 @@ export class Board{
     }
   
     render(ctx){
-      this.map.forEach(cell => {
+      this.map.map.forEach(cell => {
         if(cell.row!=0 && cell.col!=0 && cell.row!=ROW_MAX+1 && cell.col!=COL_MAX+1){
           if(cell.isAlive){
             ctx.clearRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  

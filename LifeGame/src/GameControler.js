@@ -23,7 +23,6 @@ export class GameControler{
 
   startGame(){
     this.board.map.forEach(cell => {
-      console.log(`${this.board.map}`)
       if(cell.judgeNextstage(this.board.map)){
         console.log('change')
         cell.change();
