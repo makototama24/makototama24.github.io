@@ -38,8 +38,8 @@ export class GameControler{
      for(let r = cell.row; r < cell.row+3; r++){
        for(let c = cell.col; c < cell.col+3; c++){
          if(r != cell.row || c != cell.col){
-           console.log((r+1)*(ROW_MAX+2)*(c+1))
-           if(this.board.map.map[(r+1)*(ROW_MAX+2)*(c+1)].isAlive){
+           console.log(r*(ROW_MAX+2)*c)
+           if(this.board.map.map[r*(ROW_MAX+2)*c].isAlive){
              count++;
            }
          }
