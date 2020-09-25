@@ -11,7 +11,7 @@ export class Cell{
   
     isClick(point){
       console.log(`${point.x} ${point.y}`)
-      return ((this.row+1)*Cell_width <= point.x) && (point.x < (this.row+2)*Cell_width) && ((this.col+1)*Cell_height <= point.y) && (point.y < (this.col+2)*Cell_height);
+      return ((this.row-1)*Cell_width <= point.x) && (point.x < (this.row)*Cell_width) && ((this.col-1)*Cell_height <= point.y) && (point.y < (this.col)*Cell_height);
     }
   
     // 生死の変更
