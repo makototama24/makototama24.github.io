@@ -28,6 +28,7 @@ export class Cell{
           }
         }
       }
+      console.log(`count = ${count}`);
   
       // 生存判定
       if(this.isAlive){
