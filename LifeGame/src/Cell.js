@@ -24,7 +24,7 @@ export class Cell{
       for(let r = this.row-1; r < this.row+1; r++){
         for(let c = this.col-1; c < this.col+1; c++){
           if(r != this.row && c != this.col){
-            count += map[r,c].isAlive;
+            count +=Number(map[r,c].isAlive);
           }
         }
       }
