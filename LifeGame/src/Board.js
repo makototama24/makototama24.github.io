@@ -17,14 +17,14 @@ export class Board{
       this.map.forEach(cell => {
         if(cell.row!=0 && cell.col!=0 && cell.row!=ROW_MAX+1 && cell.col!=COL_MAX+1){
           if(cell.isAlive){
-            ctx.clearRect(cell.row*Cell_width, cell.col*Cell_height, Cell_width, Cell_height);  
+            ctx.clearRect((cell.row-1)*Cell_width, cell.col*Cell_height, Cell_width, Cell_height);  
             ctx.fillStyle = 'rgb(255, 190, 190)';
-            ctx.fillRect(cell.row*Cell_width, cell.col*Cell_height, Cell_width, Cell_height);  
+            ctx.fillRect((cell.row-1)*Cell_width, cell.col*Cell_height, Cell_width, Cell_height);  
           }
           else{
-            ctx.clearRect(cell.row*Cell_width, cell.col*Cell_height, Cell_width, Cell_height);  
+            ctx.clearRect((cell.row-1)*Cell_width, cell.col*Cell_height, Cell_width, Cell_height);  
             ctx.strokeStyle = 'rgb(200, 200, 200)';
-            ctx.strokeRect(cell.row*Cell_width, cell.col*Cell_height, Cell_width, Cell_height);  
+            ctx.strokeRect((cell.row-1)*Cell_width, cell.col*Cell_height, Cell_width, Cell_height);  
           }
         }
       });
