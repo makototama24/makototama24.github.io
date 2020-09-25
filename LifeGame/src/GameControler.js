@@ -45,7 +45,7 @@ export class GameControler{
          }
        }
      }
-     console.log(`count = ${count} cell = ${cell.row}, ${cell.col} ${cell.isAlive}`);
+     console.log(`count = ${count} cell = ${cell.row}, ${cell.col} ${this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].isAlive}`);
  
      // 生存判定
      if(cell.isAlive){
