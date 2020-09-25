@@ -26,6 +26,7 @@ export class Cell{
         for(let c = this.col-1; c < this.col+2; c++){
           if(r != this.row || c != this.col){
             count++;
+          }
         }
       }
       console.log(`count = ${count}`);
