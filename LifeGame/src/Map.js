@@ -3,7 +3,7 @@ import {ROW_MAX, COL_MAX, Cell_height, Cell_width} from './GameControler.js';
 
 export class Map{
     constructor(){
-        this.map = new Array(ROW_MAX+2*COL_MAX+2);
+        this.map = new Array((ROW_MAX+2)*(COL_MAX+2));
     }
 
     push(cell){
