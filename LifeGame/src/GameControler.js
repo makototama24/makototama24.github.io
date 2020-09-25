@@ -42,7 +42,7 @@ export class GameControler{
          }
        }
      }
-     console.log(`count = ${count}`);
+     console.log(`count = ${count} cell = ${cell.row}, ${cell.col}`);
  
      // 生存判定
      if(cell.isAlive){
