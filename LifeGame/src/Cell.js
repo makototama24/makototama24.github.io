@@ -3,7 +3,6 @@ import {ROW_MAX, COL_MAX, Cell_height, Cell_width} from './GameControler.js'
 
 export class Cell{
     constructor(row, col){
-      console.log('cell')
       this.row = row;
       this.col = col;
       this.isAlive = false;
@@ -24,7 +23,7 @@ export class Cell{
       console.log(`${this.row} ${this.col}`)
       for(let r = this.row-1; r < this.row+2; r++){
         for(let c = this.col-1; c < this.col+2; c++){
-          if(r != this.row || c != this.col){
+          if((r != this.row || c != this.col) && map[r, c].isAlive){
             count++;
           }
         }
