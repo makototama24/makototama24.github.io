@@ -37,7 +37,7 @@ export class GameControler{
      let count = 0;
      for(let r = cell.row; r < cell.row+3; r++){
        for(let c = cell.col; c < cell.col+3; c++){
-         if((r != cell.row || c != cell.col) && this.board.map.map[r*(ROW_MAX+2) + c].isAlive){
+         if((r != cell.row || c != cell.col){
            count++;
          }
        }
