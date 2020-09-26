@@ -42,7 +42,7 @@ export class GameControler{
         this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].change();
       });
       this.board.render(this.ctx);
-    }, 500);
+    }, 100);
   }
 
   stopLife(){
