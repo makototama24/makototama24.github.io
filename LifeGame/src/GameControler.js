@@ -46,6 +46,7 @@ export class GameControler{
 
   stopLife(){
     clearInterval(this.startfunction);
+    this.board.render(this.ctx, this.isPlay)
   }
 
   resetGame(){
