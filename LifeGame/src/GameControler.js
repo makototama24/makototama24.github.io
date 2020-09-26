@@ -33,12 +33,12 @@ export class GameControler{
   }
 
   judge(cell){
-    if(cell.row < ROW_MAX && cell.col < COL_MAX){
+    if(cell.row != 0 && cell.col != 0 && cell.row != COL_MAX+1 && cell.col != COL_MAX+1){
       // 周囲のマスの生存状況を確認
      let count = 0;
-     for(let r = cell.row; r < cell.row+3; r++){
-       for(let c = cell.col; c < cell.col+3; c++){
-         if(r != cell.row+1 || c != cell.col+1){
+     for(let r = cell.row-1; r <= cell.row+1; r++){
+       for(let c = cell.col-1; c <= cell.col+1; c++){
+         if(r != cell.row || c != cell.col){
            if(this.board.map.map[r*(ROW_MAX+2)+c].isAlive){
              count++;
            }
