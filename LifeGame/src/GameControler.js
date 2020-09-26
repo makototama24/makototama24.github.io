@@ -15,6 +15,7 @@ export class GameControler{
     this.board = new Board();
     this.isPlay = false;
     this.InitLife();
+    console.log(this.board.map.map)
     this.board.render(this.ctx, this.isPlay);
     this.startfunction;
 
