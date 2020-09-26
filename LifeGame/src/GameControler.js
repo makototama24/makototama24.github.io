@@ -16,15 +16,18 @@ export class GameControler{
     this.board.render(this.ctx);
     this.isPlay = false;
 
-    document.getElementById("start_btn").addEventListener('click', () =>this.startGame(), false);
-    document.getElementById("stop_btn").addEventListener('click', () =>this.stopGame(), false);
+    document.getElementById("start_btn").addEventListener('click', () =>{
+      this.isPlay  = !this.isPlay;
+      this.btn();
+    }, false);
+    document.getElementById("stop_btn").addEventListener('click', () =>{
+      this.isPlay = !this.isPlay;
+      this.btn();
+    }, false);
     document.getElementById("reset_btn").addEventListener('click', () =>this.resetGame(), false);
     this.canvas.addEventListener('click', e => this.click(e), false);
-  }
 
-  startGame(){
-    this.isPlay = true;
-    window.setInterval(() =>{
+    const start =  window.setInterval(() =>{
       let array = [];
       this.board.map.map.forEach(cell => {
         if(this.judge(cell)){
@@ -37,8 +40,29 @@ export class GameControler{
       });
       this.board.render(this.ctx);
     }, 500);
+  }
+
+  btn(){
+    if(this.isPlay){
+      window.setInterval(() =>{
+        let array = [];
+        this.board.map.map.forEach(cell => {
+          if(this.judge(cell)){
+            array.push(cell);
+            console.log('change')
+          }
+        });
+        array.forEach(cell => {
+          this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].change();
+        });
+        this.board.render(this.ctx);
+      }, 500);
+    }
+    else{
+      clearInterval(start);
+    }
+    
       
-    console.log('start')
   }
 
   judge(cell){
