@@ -45,10 +45,10 @@ export class GameControler{
          }
        }
      }
-     console.log(`count = ${count} cell = ${cell.row}, ${cell.col} ${this.board.map.map[(cell.row+1)*(ROW_MAX+2)+(cell.col+1)].isAlive}`);
+     console.log(`count = ${count} cell = ${cell.row}, ${cell.col} ${this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].isAlive}`);
  
      // 生存判定
-     if(this.board.map.map[(cell.row+1)*(ROW_MAX+2)+(cell.col+1)].isAlive){
+     if(this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].isAlive){
        if(count ===2 || count ===3){
          return false;
        }
