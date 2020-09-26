@@ -23,7 +23,7 @@ export class GameControler{
     }, false);
     document.getElementById("stop_btn").addEventListener('click', () =>{
       this.isPlay = !this.isPlay;
-      this.btn();
+      this.stopLife();
     }, false);
     document.getElementById("reset_btn").addEventListener('click', () =>this.resetGame(), false);
     this.canvas.addEventListener('click', e => this.click(e), false);
