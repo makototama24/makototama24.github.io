@@ -23,7 +23,7 @@ export class Board{
           }
           else{
             ctx.clearRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
-            ctx.strokeStyle = 'rgb(200, 200, 200)';
+            ctx.strokeStyle = 'rgb(210, 210, 210)';
             ctx.strokeRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
           }
         }
