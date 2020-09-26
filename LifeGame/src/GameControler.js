@@ -23,11 +23,15 @@ export class GameControler{
 
   startGame(){
     this.board.map.map.forEach(cell => {
+      let array = [];
       if(this.judge(cell)){
+        array.push(cell);
         console.log('change')
-        this.board.map.map[(cell.row+1)*(ROW_MAX+2)+(cell.col+1)].change();
       }
     });
+    array.forEach(cell => {
+      this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].change();
+    })
     this.board.render(this.ctx);
     console.log('start')
   }
