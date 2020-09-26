@@ -30,27 +30,32 @@ export class GameControler{
 
   btn(){
     let start
-    
     if(this.isPlay){
-      start = window.setInterval(() =>{
-        let array = [];
-        this.board.map.map.forEach(cell => {
-          if(this.judge(cell)){
-            array.push(cell);
-            console.log('change')
-          }
-        });
-        array.forEach(cell => {
-          this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].change();
-        });
-        this.board.render(this.ctx);
-      }, 500);
+      this.startLife(start);
     }
     else{
-      clearInterval(start);
+      this.stopLife(start);
     }
-    
-      
+  }
+
+  startLife(start){
+    start = window.setInterval(() =>{
+      let array = [];
+      this.board.map.map.forEach(cell => {
+        if(this.judge(cell)){
+          array.push(cell);
+          console.log('change')
+        }
+      });
+      array.forEach(cell => {
+        this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].change();
+      });
+      this.board.render(this.ctx);
+    }, 500);
+  }
+
+  stopLife(start){
+    clearInterval(start);
   }
 
   judge(cell){
