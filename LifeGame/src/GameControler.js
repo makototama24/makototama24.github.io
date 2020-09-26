@@ -49,6 +49,15 @@ export class GameControler{
     clearInterval(this.startfunction);
   }
 
+  resetGame(){
+    console.log('reset')
+    clearInterval(this.startfunction);
+    this.board.map.map.forEach(cell => {
+      cell.isAlive = false;
+    });
+    this.board.render(this.ctx);
+  }
+
   judge(cell){
     if(cell.row != 0 && cell.col != 0 && cell.row != COL_MAX+1 && cell.col != COL_MAX+1){
       // 周囲のマスの生存状況を確認
@@ -79,21 +88,7 @@ export class GameControler{
          return false;
        }
      }
-    }
-     
-  }
-
-  stopGame(){
-    console.log('stop')
-    this.isPlay = false;
-  }
-
-  resetGame(){
-    console.log('reset')
-    this.board.map.map.forEach(cell => {
-      cell.change();
-    });
-    this.board.render(this.ctx);
+    }  
   }
 
   click(e){
