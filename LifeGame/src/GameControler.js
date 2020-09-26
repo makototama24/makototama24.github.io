@@ -29,22 +29,10 @@ export class GameControler{
   }
 
   btn(){
-    const start =  window.setInterval(() =>{
-      let array = [];
-      this.board.map.map.forEach(cell => {
-        if(this.judge(cell)){
-          array.push(cell);
-          console.log('change')
-        }
-      });
-      array.forEach(cell => {
-        this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].change();
-      });
-      this.board.render(this.ctx);
-    }, 500);
+    let start
     
     if(this.isPlay){
-      window.setInterval(() =>{
+      start = window.setInterval(() =>{
         let array = [];
         this.board.map.map.forEach(cell => {
           if(this.judge(cell)){
