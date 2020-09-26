@@ -14,6 +14,7 @@ export class GameControler{
     this.ctx = this.canvas.getContext(`2d`);
     this.board = new Board();
     this.isPlay = false;
+    this.InitLife();
     this.board.render(this.ctx, this.isPlay);
     this.startfunction;
 
@@ -27,6 +28,45 @@ export class GameControler{
     }, false);
     document.getElementById("reset_btn").addEventListener('click', () =>this.resetGame(), false);
     this.canvas.addEventListener('click', e => this.click(e), false);
+  }
+
+  InitLife(){
+    this.board.map.map[4, 10] = true;
+    this.board.map.map[4, 11] = true;
+    this.board.map.map[5, 10] = true;
+    this.board.map.map[5, 11] = true;
+    this.board.map.map[14, 10] = true;
+    this.board.map.map[14, 11] = true;
+    this.board.map.map[14, 12] = true;
+    this.board.map.map[15, 9] = true;
+    this.board.map.map[15, 13] = true;
+    this.board.map.map[16, 8] = true;
+    this.board.map.map[16, 14] = true;
+    this.board.map.map[17, 8] = true;
+    this.board.map.map[17, 14] = true;
+    this.board.map.map[18, 11] = true;
+    this.board.map.map[19, 9] = true;
+    this.board.map.map[19, 13] = true;
+    this.board.map.map[20, 10] = true;
+    this.board.map.map[20, 11] = true;
+    this.board.map.map[20, 12] = true;
+    this.board.map.map[21, 11] = true;
+    this.board.map.map[24, 8] = true;
+    this.board.map.map[26, 8] = true;
+    this.board.map.map[26, 9] = true;
+    this.board.map.map[26, 10] = true;
+    this.board.map.map[27, 8] = true;
+    this.board.map.map[27, 9] = true;
+    this.board.map.map[28, 7] = true;
+    this.board.map.map[28, 11] = true;
+    this.board.map.map[30, 6] = true;
+    this.board.map.map[30, 7] = true;
+    this.board.map.map[30, 11] = true;
+    this.board.map.map[30, 12] = true;
+    this.board.map.map[40, 8] = true;
+    this.board.map.map[40, 9] = true;
+    this.board.map.map[41, 8] = true;
+    this.board.map.map[41, 9] = true;
   }
 
   startLife(){
