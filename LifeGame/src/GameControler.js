@@ -22,8 +22,8 @@ export class GameControler{
   }
 
   startGame(){
+    let array = [];
     this.board.map.map.forEach(cell => {
-      let array = [];
       if(this.judge(cell)){
         array.push(cell);
         console.log('change')
@@ -88,7 +88,6 @@ export class GameControler{
     };
     this.board.map.map.forEach(cell => {
       if(cell.isClick(point)){
-    console.log(`${point.x} ${point.y} ${cell.row} ${cell.col}`)
         cell.change();
       }
     });
