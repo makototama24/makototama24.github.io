@@ -15,10 +15,11 @@ export class GameControler{
     this.board = new Board();
     this.board.render(this.ctx);
     this.isPlay = false;
+    this.startfunction;
 
     document.getElementById("start_btn").addEventListener('click', () =>{
       this.isPlay  = !this.isPlay;
-      this.btn();
+      this.startLife();
     }, false);
     document.getElementById("stop_btn").addEventListener('click', () =>{
       this.isPlay = !this.isPlay;
@@ -28,18 +29,8 @@ export class GameControler{
     this.canvas.addEventListener('click', e => this.click(e), false);
   }
 
-  btn(){
-    let start
-    if(this.isPlay){
-      this.startLife(start);
-    }
-    else{
-      this.stopLife(start);
-    }
-  }
-
-  startLife(start){
-    start = window.setInterval(() =>{
+  startLife(){
+    this.startfunction = window.setInterval(() =>{
       let array = [];
       this.board.map.map.forEach(cell => {
         if(this.judge(cell)){
@@ -54,8 +45,8 @@ export class GameControler{
     }, 500);
   }
 
-  stopLife(start){
-    clearInterval(start);
+  stopLife(){
+    clearInterval(this.startfunction);
   }
 
   judge(cell){
