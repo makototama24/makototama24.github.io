@@ -1,10 +1,10 @@
 import {Cell} from './Cell.js'
 import {Board} from './Board.js';
 
-export const ROW_MAX = 25;
-export const COL_MAX = 25;
-export const Cell_width = 20;
-export const Cell_height = 20;
+export const ROW_MAX = 50;
+export const COL_MAX = 50;
+export const Cell_width = 10;
+export const Cell_height = 10;
 
 // export const drawCanvas = () => {new GameControl();};
 
@@ -13,8 +13,8 @@ export class GameControler{
     this.canvas = document.getElementById('game_canvas');
     this.ctx = this.canvas.getContext(`2d`);
     this.board = new Board();
-    this.board.render(this.ctx);
     this.isPlay = false;
+    this.board.render(this.ctx, this.isPlay);
     this.startfunction;
 
     document.getElementById("start_btn").addEventListener('click', () =>{
@@ -40,7 +40,7 @@ export class GameControler{
       array.forEach(cell => {
         this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].change();
       });
-      this.board.render(this.ctx);
+      this.board.render(this.ctx, this.isPlay);
     }, 150);
   }
 
@@ -49,11 +49,12 @@ export class GameControler{
   }
 
   resetGame(){
+    this.isPlay = false;
     clearInterval(this.startfunction);
     this.board.map.map.forEach(cell => {
       cell.isAlive = false;
     });
-    this.board.render(this.ctx);
+    this.board.render(this.ctx, this.isPlay);
   }
 
   judge(cell){
@@ -100,7 +101,7 @@ export class GameControler{
         cell.change();
       }
     });
-    this.board.render(this.ctx);
+    this.board.render(this.ctx, this.isPlay);
   }
 }
 

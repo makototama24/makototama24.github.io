@@ -13,7 +13,7 @@ export class Board{
       }
     }
   
-    render(ctx){
+    render(ctx, isPlay){
       this.map.map.forEach(cell => {
         if(cell.row!=0 && cell.col!=0 && cell.row!=ROW_MAX+1 && cell.col!=COL_MAX+1){
           if(cell.isAlive){
@@ -22,9 +22,16 @@ export class Board{
             ctx.fillRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
           }
           else{
-            ctx.clearRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
-            ctx.strokeStyle = 'rgb(210, 210, 210)';
-            ctx.strokeRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
+            if(isPlay){
+              ctx.clearRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
+              ctx.strokeStyle = 'rgb(230, 230, 230)';
+              ctx.strokeRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
+            }
+            else{
+              ctx.clearRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
+              ctx.strokeStyle = 'rgb(210, 210, 210)';
+              ctx.strokeRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);   
+            }
           }
         }
       });
