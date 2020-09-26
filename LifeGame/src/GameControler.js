@@ -26,7 +26,9 @@ export class GameControler{
     }, false);
     document.getElementById("reset_btn").addEventListener('click', () =>this.resetGame(), false);
     this.canvas.addEventListener('click', e => this.click(e), false);
+  }
 
+  btn(){
     const start =  window.setInterval(() =>{
       let array = [];
       this.board.map.map.forEach(cell => {
@@ -40,9 +42,7 @@ export class GameControler{
       });
       this.board.render(this.ctx);
     }, 500);
-  }
-
-  btn(){
+    
     if(this.isPlay){
       window.setInterval(() =>{
         let array = [];
