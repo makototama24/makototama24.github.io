@@ -14,7 +14,6 @@ export class GameControler{
     this.ctx = this.canvas.getContext(`2d`);
     this.board = new Board();
     this.isPlay = false;
-    this.InitLife();
     console.log(this.board.map.map)
     this.board.render(this.ctx, this.isPlay);
     this.startfunction;
@@ -31,44 +30,6 @@ export class GameControler{
     this.canvas.addEventListener('click', e => this.click(e), false);
   }
 
-  InitLife(){
-    this.board.map.map[4, 10].isAlive = true;
-    this.board.map.map[4, 11].isAlive = true;
-    this.board.map.map[5, 10].isAlive = true;
-    this.board.map.map[5, 11].isAlive = true;
-    this.board.map.map[14, 10].isAlive = true;
-    this.board.map.map[14, 11].isAlive = true;
-    this.board.map.map[14, 12].isAlive = true;
-    this.board.map.map[15, 9].isAlive = true;
-    this.board.map.map[15, 13].isAlive = true;
-    this.board.map.map[16, 8].isAlive = true;
-    this.board.map.map[16, 14].isAlive = true;
-    this.board.map.map[17, 8].isAlive = true;
-    this.board.map.map[17, 14].isAlive = true;
-    this.board.map.map[18, 11].isAlive = true;
-    this.board.map.map[19, 9].isAlive = true;
-    this.board.map.map[19, 13].isAlive = true;
-    this.board.map.map[20, 10].isAlive = true;
-    this.board.map.map[20, 11].isAlive = true;
-    this.board.map.map[20, 12].isAlive = true;
-    this.board.map.map[21, 11].isAlive = true;
-    this.board.map.map[24, 8].isAlive = true;
-    this.board.map.map[26, 8].isAlive = true;
-    this.board.map.map[26, 9].isAlive = true;
-    this.board.map.map[26, 10].isAlive = true;
-    this.board.map.map[27, 8].isAlive = true;
-    this.board.map.map[27, 9].isAlive = true;
-    this.board.map.map[28, 7].isAlive = true;
-    this.board.map.map[28, 11].isAlive = true;
-    this.board.map.map[30, 6].isAlive = true;
-    this.board.map.map[30, 7].isAlive = true;
-    this.board.map.map[30, 11].isAlive = true;
-    this.board.map.map[30, 12].isAlive = true;
-    this.board.map.map[40, 8].isAlive = true;
-    this.board.map.map[40, 9].isAlive = true;
-    this.board.map.map[41, 8].isAlive = true;
-    this.board.map.map[41, 9].isAlive = true;
-  }
 
   startLife(){
     this.startfunction = window.setInterval(() =>{

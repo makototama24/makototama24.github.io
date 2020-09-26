@@ -24,7 +24,7 @@ export class Board{
           else{
             if(isPlay){
               ctx.clearRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
-              ctx.strokeStyle = 'rgb(230, 230, 230)';
+              ctx.strokeStyle = 'rgb(240, 240, 240)';
               ctx.strokeRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
             }
             else{
