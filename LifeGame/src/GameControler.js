@@ -24,7 +24,7 @@ export class GameControler{
 
   startGame(){
     this.isPlay = true;
-    while(this.isPlay){
+    window.setInterval(() =>{
       let array = [];
       this.board.map.map.forEach(cell => {
         if(this.judge(cell)){
@@ -36,8 +36,8 @@ export class GameControler{
         this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].change();
       });
       this.board.render(this.ctx);
-    }
-    
+    }, 500);
+      
     console.log('start')
   }
 
