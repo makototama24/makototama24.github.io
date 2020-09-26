@@ -84,6 +84,7 @@ export class GameControler{
     };
     this.board.map.map.forEach(cell => {
       if(cell.isClick(point)){
+    console.log(`${point.x} ${point.y} ${cell.row} ${cell.col}`)
         cell.change();
       }
     });
