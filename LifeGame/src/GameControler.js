@@ -14,6 +14,7 @@ export class GameControler{
     this.ctx = this.canvas.getContext(`2d`);
     this.board = new Board();
     this.board.render(this.ctx);
+    this.isPlay = false;
 
     document.getElementById("start_btn").addEventListener('click', () =>this.startGame(), false);
     document.getElementById("stop_btn").addEventListener('click', () =>this.stopGame(), false);
@@ -22,17 +23,21 @@ export class GameControler{
   }
 
   startGame(){
-    let array = [];
-    this.board.map.map.forEach(cell => {
-      if(this.judge(cell)){
-        array.push(cell);
-        console.log('change')
-      }
-    });
-    array.forEach(cell => {
-      this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].change();
-    })
-    this.board.render(this.ctx);
+    this.isPlay = true;
+    while(this.isPlay){
+      let array = [];
+      this.board.map.map.forEach(cell => {
+        if(this.judge(cell)){
+          array.push(cell);
+          console.log('change')
+        }
+      });
+      array.forEach(cell => {
+        this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].change();
+      });
+      this.board.render(this.ctx);
+    }
+    
     console.log('start')
   }
 
@@ -48,9 +53,7 @@ export class GameControler{
            }
          }
        }
-     }
-     console.log(`count = ${count} cell = ${cell.row}, ${cell.col} ${this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].isAlive}`);
- 
+     } 
      // 生存判定
      if(this.board.map.map[cell.row*(ROW_MAX+2)+cell.col].isAlive){
        if(count ===2 || count ===3){
@@ -74,10 +77,15 @@ export class GameControler{
 
   stopGame(){
     console.log('stop')
+    this.isPlay = false;
   }
 
   resetGame(){
     console.log('reset')
+    this.board.map.map.forEach(cell => {
+      cell.change();
+    });
+    this.board.render(this.ctx);
   }
 
   click(e){
