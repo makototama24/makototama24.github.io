@@ -18,7 +18,7 @@ export class Board{
         if(cell.row!=0 && cell.col!=0 && cell.row!=ROW_MAX+1 && cell.col!=COL_MAX+1){
           if(cell.isAlive){
             ctx.clearRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
-            ctx.fillStyle = 'rgb(255, 190, 190)';
+            ctx.fillStyle = 'rgb(255, 170, 170)';
             ctx.fillRect((cell.row-1)*Cell_width, (cell.col-1)*Cell_height, Cell_width, Cell_height);  
           }
           else{
