@@ -1,73 +1,75 @@
-enum color = {}
+const Color = {Enpty: "rgba(0,0,0,1)"}
 
-class GameController{
-    constructor(){
-        this.canvas = document.getElementById("game_canvas");
-        this.width = 8;
-        this.height = 8;
-        this.cellSize = 80;
-        this.board = new Board(this.width, this.height, this.cellSize, this.canvas);
+class Player{
+    #color
+    
+}
+
+class Stone{
+    #color
+    #position
+    constructor(color, pos){
+       this.#color = color;
+       this.#position = pos;
+    }
+
+    flip(aftercolor){
+        this.#color = aftercolor;
+    }
+
+    set position(pos){
+        this.#position = pos;
     }
 }
 
-class Board{
-    constructor(width, height, cellsize, canvas){
-        this.boardWidth = width;
-        this.boardHeight = height;
-        this.cellSize = cellsize;
-        this.ctx = canvas.getContext("2d");
-        this.stoneMap = new Array(height);
-        for(let i = 0; i < this.boardHeight; i++){
-            this.stoneMap[i] = new Array(width);
-            for(let j = 0; j < this.boardWidth; j++){
-                this.stoneMap[i][j] = new Stone("B", [i, j]);
-            }
-        }
-
-        this.createBasedBoard();
-    }
-
-    createBasedBoard(){
-        this.stoneMap.forEach((arr, i) => {
+class View{
+    static createBasedBoard(board){
+        const ctx = document.getElementById("game_canvas").getContext("2d");
+        const bc = board.CELLSIZE;
+        console.log(board)
+        board.stoneMap.forEach((arr, i) => {
             arr.forEach((stone, j) => {
-                this.ctx.fillStyle = 'rgb(150, 230, 150)';
-                this.ctx.fillRect(j*this.cellSize, i*this.cellSize, this.cellSize, this.cellSize);
-                this.ctx.strokeStyle = 'rgb(240, 240, 240)';
-                this.ctx.lineWidth = 1;
-                this.ctx.strokeRect(j*this.cellSize, i*this.cellSize, this.cellSize, this.cellSize);  
-                this.ctx.strokeStyle = 'rgb(100, 100, 100)';
-                this.ctx.beginPath();
-                this.ctx.lineWidth = 10;
-                this.ctx.strokeRect(0, 0, this.cellSize*this.boardHeight, this.cellSize*this.boardWidth);  
+                ctx.fillStyle = 'rgb(150, 230, 150)';
+                ctx.fillRect(j*bc, i*bc, bc, bc);
+                ctx.strokeStyle = 'rgb(240, 240, 240)';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(j*bc, i*bc, bc, bc);  
+                ctx.strokeStyle = 'rgb(100, 100, 100)';
+                ctx.beginPath();
+                ctx.lineWidth = 10;
+                ctx.strokeRect(0, 0, bc*board.ROWS, bc*board.COLUMNS);  
             });
         });
     }
 }
 
-class Player{
+//盤上に何の駒がおいてあるかというデータ
+class Board{
     constructor(){
+        this.ROWS = 8;
+        this.COLUMN = 8;
+        this.CELLSIZE = 30;
 
+        this.stoneMap = new Array(this.COLUMNS);
+        for(let c = 0; c < this.COLUMNS; c++){
+            this.stoneMap[c] = new Array(this.ROWS);
+            for(let r = 0; r < this.ROWS; r++){
+                this.stoneMap[c][r] = new Stone(Color.Enpty, [c, r]);
+            }
+        }
+
+        View.createBasedBoard(this);
     }
 }
 
-class Stone{
-    constructor(colorstone){
-        this.color = colorstone.color;
-        this.position = 
-    }
-
-    getColor(){
-        this.colorstone.color();
+//ゲーム進行を担当
+class Game{
+    constructor(){
+    this.view = new View();
+    this.board = new Board();
     }
 }
-
-class BlackStone extends Stone{
-    constructors(){
-        this.color = 'rgb(0,0,0)'
-    }
-}
-
 
 //----------------------------------------------------------------------------------
 
-new GameController();
+new Game();
