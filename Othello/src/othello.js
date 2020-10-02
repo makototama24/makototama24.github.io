@@ -6,26 +6,19 @@ const Color = {
 
 class Player{
     constructor(turn, board){
-        this.color = turn === 1 ? Color.Player1 : Color.Player2;
+        if(turn == 1){
+            this.color = Color.Player1;
+            this.oppositeColor = Color.Player2;
+        }
+        else{
+            this.color = Color.Player2;
+            this.oppositeColor = Color.Player1;
+        }
         this.board = board;
     }
 
-    isAblePut(row, column, stoneMap){
-        console.log(`${stoneMap} map`)
-        if(stoneMap[row][column].color == Color.Enpty){
-            const isOppositeStone = function(stone){ return stone.color != this.color && stone.color != Color.Enpty };
-            console.log(stoneMap)
-            upFarthestStone = stoneMap.slice(0,row).filter(isOppositeStone)[0]
-            downFarthestStone = stoneMap.slice(row+1,this.board.ROWS).filter(isOppositeStone)[0]
-            leftFarthestStone = stoneMap.slice(0,column).filter(isOppositeStone)[0]
-            rightFarthestStone = stoneMap.slice(column, this.board.COLUMNS).filter(isOppositeStone)[0]
-            console.log(upFarthestStone, downFarthestStone, leftFarthestStone, rightFarthestStone);
-        }     
-      else return false; 
-    }
-
     putStone(row, column, stoneMap){
-        stoneMap[row][column].color = this.color;
+        stoneMap[row][column].flip(this.oppositeColor);
     }
 }
 
@@ -88,6 +81,86 @@ class Board{
         this.stoneMap[4][3].color = Color.Player2;
         View.viewBoard(this);
     }
+
+    puttableCellList(row, column, player){
+        const puttableCellList = new Array();
+
+        //up
+        const up = new Array();
+        for(let i = 0; i < row; i++){
+            up.push(this.stoneMap[i][column])
+        }
+        const mystone = new Array();
+        for(let i = up.length-1; i >= 0; i--){
+            if(up[i].color == Color.Enpty) break;
+            else if(up[i].color == player.color){
+                mystone.push(up[i]);
+            }
+        }
+        if(mystone.length != 0 && mystone[0].position[0] + 1 < row){
+            for(let i = mystone[0].position[0]+1; i < row; i++){
+                puttableCellList.push(this.stoneMap[i][column])
+            }
+        }
+
+        //down
+        const down = new Array();
+        for(let i = row+1; i < this.ROWS; i++){
+            down.push(this.stoneMap[i][column])
+        }
+        mystone.length = 0;
+        for(let i = 0; i < down.length; i++){
+            if(down[i].color == Color.Enpty) break;
+            else if(down[i].color == player.color){
+                mystone.push(down[i]);
+            }
+        }
+        if(mystone.length != 0 && mystone[0].position[0] > row + 1){
+            for(let i = row+1; i < mystone[0].position[0]; i++){
+                puttableCellList.push(this.stoneMap[i][column])
+            }
+        }
+
+
+        //left
+        const left = new Array();
+        for(let i = 0; i < column; i++){
+            left.push(this.stoneMap[row][i])
+        }
+        mystone.length = 0
+        for(let i = left.length-1; i >= 0; i--){
+            if(left[i].color == Color.Enpty) break;
+            else if(left[i].color == player.color){
+                mystone.push(left[i]);
+            }
+        }
+        if(mystone.length != 0 && mystone[0].position[1] + 1 < column){
+            for(let i = mystone[0].position[1]+1; i < column; i++){
+                puttableCellList.push(this.stoneMap[row][i])
+            }
+        }
+
+        //right
+        const right = new Array();
+        for(let i = column+1; i < this.COLUMNS; i++){
+            right.push(this.stoneMap[row][i])
+        }
+        mystone.length = 0;
+        for(let i = 0; i < right.length; i++){
+            if(right[i].color == Color.Enpty) break;
+            else if(right[i].color == player.color){
+                mystone.push(right[i]);
+            }
+        }
+        if(mystone.length != 0 && mystone[0].position[1] > column + 1){
+            for(let i = column+1; i < mystone[0].position[1]; i++){
+                puttableCellList.push(this.stoneMap[row][i])
+            }
+        }
+        console.log(puttableCellList)
+
+        return puttableCellList;
+    }
 }
 
 //ゲーム進行を担当
@@ -111,9 +184,9 @@ class Game{
 
         const willCOLUMN = Math.floor(point.x / this.board.CELLSIZE);
         const willROW = Math.floor(point.y / this.board.CELLSIZE);
-        if(this.playerList[this.playerTurn % 2].isAblePut(willROW, willCOLUMN, this.board.stoneMap)){
-            this.playerList[this.playerTurn % 2].putStone(willROW, willCOLUMN, this.board.stoneMap);
 
+        const list = this.board.puttableCellList(willROW, willCOLUMN, this.playerList[this.playerTurn]);
+        if(list.length){
             View.viewBoard(this.board);
             this.playerTurn++;
         }
