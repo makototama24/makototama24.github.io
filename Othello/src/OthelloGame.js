@@ -35,6 +35,10 @@ class Player{
         //stoneを設置
         map[stone.coordinate] = stone;
     }
+
+    filpStone(){
+
+    }
 }
 
 class View{
@@ -101,6 +105,8 @@ class GameController{
     }
 
     checkToPutStone(stone, map){
+        const map = this.board.map;
+        //up
         return true;
     }
 
@@ -125,7 +131,7 @@ class GameController{
         if(this.checkToPutStone(stone, map)){
             //Playerが石を設置
             person.putStone(stone, map);
-            //boardが石の反転処理
+            //Playerが石の反転処理
             //Viewが描画
             View.draw(map);
             //Controllerが勝敗チェック
