@@ -32,7 +32,6 @@ class Player{
         this.myStoneColor = color;
     }
     putStone(stone, map){
-        console.log(stone)
         //stoneを設置
         map[stone.coordinate] = stone;
     }
@@ -96,23 +95,25 @@ class GameController{
 
         this.canvas = document.getElementById("game_canvas");
         this.canvas.addEventListener("click", e => this.click(e));
+        document.getElementById("reset").addEventListener("click", e => this.reset(e));
+        document.getElementById("pass").addEventListener("click", e => this.pass(e));
         
     }
 
-    static checkToPutStone(){
-        //input: stone, map
-        //output: Bool
+    checkToPutStone(stone, map){
+        return true;
     }
 
-    judgeVictoryOrDefeat(){
-        //input: map
+    judgeVictoryOrDefeat(map){
         //マスが全部埋まる or Count
         //output: none or player
+        return false;
     }
 
     click(e){
         //手番を確認
         const person = this.isPlayer1Turn ? this.players.player1 : this.players.player2;
+        const map = this.board.map;
         //クリック座標を取得
         const rect = this.canvas.getBoundingClientRect();
         const point = {
@@ -121,26 +122,28 @@ class GameController{
         };
         //Controllerが石が置けるか判定
         const stone = new Stone(person.myStoneColor, point);
-        //Playerが石を設置
-        person.putStone(stone, this.board.map);
-        //boardが石の反転処理
-        //Viewが描画
-        View.draw(this.board.map);
-        //Controllerが勝敗チェック
-        this.judgeVictoryOrDefeat();
-        //手番交換
-        this.isPlayer1Turn = !this.isPlayer1Turn;
-        //output: none
+        if(this.checkToPutStone(stone, map)){
+            //Playerが石を設置
+            person.putStone(stone, map);
+            //boardが石の反転処理
+            //Viewが描画
+            View.draw(map);
+            //Controllerが勝敗チェック
+            if(!this.judgeVictoryOrDefeat(map)){
+                 //手番交換
+                this.isPlayer1Turn = !this.isPlayer1Turn;
+            }
+        }
     }
 
-    reset(){
-        //input: event
+    reset(e){
         //リセットされたとき
+        location.reload();
     }
 
-    pass(){
-        //input: event
+    pass(e){
         //パスをするとき
+        this.isPlayer1Turn = !this.isPlayer1Turn;
     }
 }
 
