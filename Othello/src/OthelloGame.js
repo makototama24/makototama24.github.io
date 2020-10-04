@@ -22,7 +22,7 @@ class Stone{
 
     flip(){
         //色反転
-        if(this.color ==Color.BLACK) this.color = Color.WHITE;
+        if(this.color == Color.BLACK) this.color = Color.WHITE;
         else if(Color.WHITE) this.color = Color.BLACK;
     }
 }
@@ -105,8 +105,18 @@ class GameController{
     }
 
     checkToPutStone(stone, map){
-        const map = this.board.map;
-        //up
+        //left right以外
+        const moveCell = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
+        for(let i = 0; i < 8; i ++){
+            const arr = new Array();
+            for(let j = stone.position.x; 0<=j && j<8; j+=moveCell[i][0]){
+                for(let k = stone.position.y; 0<=j && j<8; j+=moveCell[i][1]){
+                    arr.push(map[j+k*BOARDSIZE])
+                }
+            }
+            console.log(arr);
+        }
+
         return true;
     }
 
