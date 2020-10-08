@@ -149,6 +149,7 @@ class GameController{
             return p1_count == 0 || p2_count == 0;
         }
         return true;
+
     }
 
     click(e){
@@ -174,6 +175,7 @@ class GameController{
             View.draw(map);
             //Controllerが勝敗チェック
             if(!this.judgeVictoryOrDefeat()){
+
                  //手番交換
                 this.isPlayer1Turn = !this.isPlayer1Turn;
             }
