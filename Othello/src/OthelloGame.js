@@ -3,8 +3,8 @@ const BOARDSIZE = 8;
 const CELLSIZE = 80;
 const Color = {
     EMPTY: "rgba(0, 0, 0, 0)",
-    BLACK: "rgb(50, 50, 50)",
-    WHITE: "rgb(255, 255, 255)",
+    PLAYER1: "rgb(50, 50, 50)",
+    PLAYER2: "rgb(255, 255, 255)",
     BOARDBASED: "rgb(150, 230, 150)",
     BOARDLINE: "rgb(240, 240, 240)",
     BOARDFRAME: "rgb(100, 100, 100)"
@@ -12,18 +12,18 @@ const Color = {
 
 class Stone{
     constructor(color, point){
-        this.color = color
+        this.color = color;
+        this.coordinate = point
         this.position = {
-            x: point.x,
-            y: point.y
+            x: point%BOARDSIZE,
+            y: Math.floor(point/BOARDSIZE)
         }
-        this.coordinate = this.position.x + this.position.y*BOARDSIZE;
     }
 
     flip(){
         //色反転
-        if(this.color == Color.BLACK) this.color = Color.WHITE;
-        else if(Color.WHITE) this.color = Color.BLACK;
+        if(this.color == Color.PLAYER1) this.color = Color.PLAYER2;
+        else if(Color.PLAYER2) this.color = Color.PLAYER1;
     }
 }
 
@@ -35,10 +35,6 @@ class Player{
         //stoneを設置
         map[stone.coordinate] = stone;
     }
-
-    filpStone(){
-
-    }
 }
 
 class View{
@@ -47,10 +43,10 @@ class View{
 
         ctx.fillStyle = Color.BOARDBASED;
         ctx.fillRect(0, 0, BOARDSIZE*CELLSIZE, BOARDSIZE*CELLSIZE);
-        map[3+4*BOARDSIZE].color = Color.BLACK;
-        map[4+3*BOARDSIZE].color = Color.BLACK;
-        map[3+3*BOARDSIZE].color = Color.WHITE;
-        map[4+4*BOARDSIZE].color = Color.WHITE;
+        map[3+4*BOARDSIZE].color = Color.PLAYER1;
+        map[4+3*BOARDSIZE].color = Color.PLAYER1;
+        map[3+3*BOARDSIZE].color = Color.PLAYER2;
+        map[4+4*BOARDSIZE].color = Color.PLAYER2;
         this.draw(map);
     }
 
@@ -92,38 +88,68 @@ class GameController{
     constructor(){
         this.board = new Board();
         this.players = {
-            player1: new Player(Color.BLACK), 
-            player2: new Player(Color.WHITE)
+            player1: new Player(Color.PLAYER1), 
+            player2: new Player(Color.PLAYER2)
         };
         this.isPlayer1Turn = true;
 
         this.canvas = document.getElementById("game_canvas");
+        this.p1Count = document.getElementById("p1_count");
+        this.p2Count = document.getElementById("p2_count");
         this.canvas.addEventListener("click", e => this.click(e));
         document.getElementById("reset").addEventListener("click", e => this.reset(e));
         document.getElementById("pass").addEventListener("click", e => this.pass(e));
-        
     }
 
-    checkToPutStone(stone, map){
-        //left right以外
+    checkToPutStone(stone){
+        this.flippableStones = new Array();
+        const map = this.board.map;
+        //left-up, left, left-dwon, up, down, right-up, right, right-down
         const moveCell = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
-        for(let i = 0; i < 8; i ++){
+        for(let i = 0; i < 8; i++){
             const arr = new Array();
-            for(let j = stone.position.x; 0<=j && j<8; j+=moveCell[i][0]){
-                for(let k = stone.position.y; 0<=j && j<8; j+=moveCell[i][1]){
-                    arr.push(map[j+k*BOARDSIZE])
+            let x = stone.position.x;
+            let y = stone.position.y;
+            while(0<=x && x<8 && 0<=y && y<8){
+                arr.push(map[x+y*BOARDSIZE])
+                x += moveCell[i][0];
+                y += moveCell[i][1];
+            }
+            let index = 1;
+            for(let j = 1; j < arr.length; j++){
+                if(arr[j].color == Color.EMPTY) {
+                    index = -1;
+                    break;
+                }
+                else if(arr[j].color != stone.color) {
+                    index++;
+                }
+                else if (arr[j].color == stone.color){
+                    for(let k = 1; k < index; k++){
+                        this.flippableStones.push(arr[k])
+                    }
+                    break;
                 }
             }
-            console.log(arr);
         }
-
-        return true;
+        return this.flippableStones.length != 0;
     }
 
-    judgeVictoryOrDefeat(map){
+    judgeVictoryOrDefeat(){
         //マスが全部埋まる or Count
-        //output: none or player
-        return false;
+        if(this.board.map.some(stone => stone.color == Color.EMPTY)){
+            let p1_count = 0;
+            let p2_count = 0;
+            this.board.map.forEach(stone => {
+                if(stone.color == Color.PLAYER1) p1_count++;
+                else if(stone.color == Color.PLAYER2) p2_count++;
+            })
+           this.p1Count.textContent = p1_count;
+           this.p2Count.textContent = p2_count;
+            return p1_count == 0 || p2_count == 0;
+        }
+        return true;
+
     }
 
     click(e){
@@ -137,15 +163,19 @@ class GameController{
             y: Math.floor((e.clientY - rect.top)/CELLSIZE)
         };
         //Controllerが石が置けるか判定
-        const stone = new Stone(person.myStoneColor, point);
-        if(this.checkToPutStone(stone, map)){
+        const stone = new Stone(person.myStoneColor, point.x+point.y*BOARDSIZE);   
+        if(this.checkToPutStone(stone)){
             //Playerが石を設置
             person.putStone(stone, map);
-            //Playerが石の反転処理
+            //石の反転処理
+            this.flippableStones.forEach(stone => {
+                stone.flip();
+            })
             //Viewが描画
             View.draw(map);
             //Controllerが勝敗チェック
-            if(!this.judgeVictoryOrDefeat(map)){
+            if(!this.judgeVictoryOrDefeat()){
+
                  //手番交換
                 this.isPlayer1Turn = !this.isPlayer1Turn;
             }
