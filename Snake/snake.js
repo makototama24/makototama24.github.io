@@ -63,9 +63,7 @@ window.onload = function(){
 
         move(game){
             for(let i = game.snakePos.length-1; 0<=i; i--){
-                if(i!=0){
-                    game.snakePos[i] = game.snakePos[i-1];
-                }
+                if(i!=0) game.snakePos[i] = game.snakePos[i-1];
                 else{
                     game.snakePos[i] += game.add[game.snakeDirection];
                     const col = game.snakePos[i] % (COLUMNS+2);
@@ -77,7 +75,6 @@ window.onload = function(){
                     else if(row == ROWS+1) game.snakePos[i] -= (COLUMNS+2)*ROWS;
                 }
             }
-            console.log(game.snakePos)
             game.board.map.forEach(cell => cell.clear());
             game.snakePos.forEach(pos => game.board.map[pos].change());
             View.draw(game.board.map);
