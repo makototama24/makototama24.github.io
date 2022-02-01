@@ -1,11 +1,67 @@
 <!DOCTYPE html>
-<html lang="ja">
-	<head>
-		<meta charset="utf-8">
-		<title>山形-仙台間 高速バス 時刻表</title>
-	</head>
-
-	<body>
-    <p>hello world</p>
-	</body>
+<html>
+  <head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <?!=include('css');?>
+  </head>
+  <header></header>
+  <body>
+    <div class="container-fluid">
+      <div class="card mt-2 border-secondary">
+        <div class="card-header">検索条件<input type=hidden id="parameter" value=<?=prm ?>></div>
+        <div class="card-body">
+          <div class="row">
+            <label class="col-12 col-sm-4 control-label fw-bold text-left">目的地</label>
+            <div class="col-12 col-sm-8 small">
+              <div class="radio" id="destination">
+                <label><input type="radio" name="radio" onchange="changeDestination()" checked>山形</label>
+                <label><input type="radio" name="radio" onchange="changeDestination()">仙台</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-12 col-sm-4 control-label fw-bold text-left">乗車地</label>
+            <div class="col-12 col-sm-8 small">
+              <div id="from" class="radio">
+                <label><input name="from" value=0 type="radio">県庁市役所前</label>
+                <label><input name="from" value=1 type="radio" checked>仙台駅前22番</label>
+                <label><input name="from" value=2 type="radio">広瀬通一番町</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-12 col-sm-4 control-label fw-bold text-left">降車地</label>
+            <div class="col-12 col-sm-8 small">
+              <div id="to" class="radio">
+                <label><input name="to" value=3 type="radio">山形県庁前</label>
+                <label><input name="to" value=4 type="radio">南高前</label>
+                <label><input name="to" value=5 type="radio" checked>山交ビル</label>
+                <label><input name="to" value=6 type="radio">山形駅前</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-4 text-left fw-bold control-label" onclick="changeSearchMethod()" id="depature">
+              出発時刻
+            </label>
+            <div class="col-12">
+              <input type="datetime-local" id="start_date" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button id="searchbtn" type="button" class="btn btn-secondary w-100 mt-2" onclick="search()">
+                <i id="loadicon" class="fas fa-spinner"></i> 検索 <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="boarding_list"></div>
+    </div>
+    
+     <?!=include('js');?>
+  </body>
+  <footer></footer>
 </html>
